@@ -1,6 +1,6 @@
 require 'date'
 require 'chronic'
-	
+
 class Committer
 	class << self
 		private
@@ -25,6 +25,7 @@ class Committer
 		while i < pattern.length
 			if (pattern[i] == "1")
 				25.times do |j|
+					j += 6000
 					commit_dates << dates[i].to_time + j
 				end
 			end
@@ -38,7 +39,7 @@ class Committer
 			puts "committing! on "
 			puts date
 			letters = ['a','b','c','d','e','f','g','h']
-			f = File.open('dummy', 'w') do |f| 
+			f = File.open('dummy', 'w') do |f|
 				f << letters.shuffle.join('')
 			end
 			`GIT_AUTHOR_DATE="#{date}" GIT_COMMITTER_DATE="#{date}" git commit -am "changed on #{date}"`
